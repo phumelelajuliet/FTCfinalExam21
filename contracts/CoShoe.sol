@@ -16,22 +16,31 @@ contract CoShoe is ERC721{
     Shoe[] public shoes;//public array
 
     constructor () ERC721 () public {
-        uint256 internal shoeSupply = 100;//mints 100 tokens
-        Shoe storage shoe;
-        shoe.name = "";
-        shoe.image = "";
-        shoe.sold = false;
-        shoes.push(shoe);
+        address owner = msg.sender;
+        _mint(msg.sender, 100);//mints 100 tokens
+        shoes.push(Shoe(owner,"","",false));
     }
 
     function buyShoe (string name, string image) external payable {
-        require(shoeSupply >= 1);//check shoe count condition
-        require(msg.value == price);//check price condition
-        shoe
+        require(shoesSold < 100, "No more shoes left.");//check shoe count condition
+        require(msg.value == price, "Price is not enough.");//check price condition
+        shoes.push(Shoe(_transferFrom(address(0),owner),name,image,true));
         shoesSold ++;
     }
 
-    function checkPurchases (address _tokenOwner) internal returns (bool[] memory index){
-        return shoes[_tokenOwner]; //bool or uint256 _tokenId
+    function checkPurchases (address _tokenOwner) internal view returns (bool[] memory index){
+        require(msg.sender == shoes[_tokenOwner],"Does not belong to the caller of the function";
+        bool[] memory array = new bool[](shoes[_tokenOwner]);
+        uint index = 0;
+        for (uint i = 0; i < shoes.length; i++) {
+            if (shoes[i] == _tokenOwner) {
+                index[index] = true; //
+            }
+            else{
+                array[index] = false;
+            }
+            index++; //increment index
+        }
+        return array;
     }
 }
