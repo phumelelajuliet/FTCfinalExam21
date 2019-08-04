@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/phumelelajuliet/FTCfinalExam21#readme",
   "dependencies": {
-    "openzeppelin-solidity": "^2.3.0"
+    "openzeppelin-solidity": "^2.3.0",
+    "web3-utils": "^1.2.0"
   }
 }
