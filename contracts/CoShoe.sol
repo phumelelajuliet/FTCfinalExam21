@@ -11,7 +11,7 @@ contract CoShoe is ERC721{
         bool sold;
     }
     //state variables
-    uint price = 0.5 ether; //change to wei
+    uint price = (0.5 ether)/(10^18); //change to wei
     uint shoesSold = 0;
     Shoe[] public shoes;//public array
 
