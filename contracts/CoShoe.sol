@@ -21,15 +21,6 @@ contract CoShoe is ERC721{
         shoes.push(Shoe(owner,"","",false));
     }
 
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-
-    function transferOwnership(address _newOwner) public onlyOwner {
-        owner = _newOwner;
-    }
-
     function buyShoe (string name, string image) external payable {
         require(shoesSold < 100, "No more shoes left.");//check shoe count condition
         require(msg.value == price, "Price is not enough.");//check price condition
